@@ -1,0 +1,12 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018, // oder eine spätere Version
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "extends": ["plugin:react/recommended"]
+}

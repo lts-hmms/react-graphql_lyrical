@@ -1,11 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+});
+
+const container = document.getElementById('app');
+const reactRoot = createRoot(container);
+
 
 const Root = () => {
-  return <div>Lyrical</div>
+  return (
+    <ApolloProvider client={client}>
+      <div>Lyrical</div>
+    </ApolloProvider>
+  );
 };
-
-const container = document.querySelector('#root');
-const reactRoot = ReactDOM.createRoot(container);
 
 reactRoot.render(<Root />);

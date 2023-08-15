@@ -5,35 +5,33 @@ const GET_SONGS = gql`
  query GetSongs{
     songs {
       title
+        id
     }
   }
 `;
 
 const DisplaySongs = () => {
-    const queryObj = useQuery(GET_SONGS);
     const { loading, error, data } = useQuery(GET_SONGS);
 
     if (loading) return <p>Loading...</p>;
     
     if (error) return <p>Error</p>;
 
-    return data.songs.map(({ title }) => (
-        <div key={title}>
-            <p>
-                {title}
-            </p>
-        </div>
-    ));
-}   
+    return (
+            data.songs.map(song => {
+                return (
+                    <li key={song.id} className='collection-item'>{song.title}</li>
+                );
+            })
+    );
+};
 
 
 export default function SongList() {
   return (
-    <div>
-        <h2>SongList</h2>
-        <br />
+    <ul className='collection'>
         <DisplaySongs />
-    </div>
+    </ul>
     );
 }
 

@@ -2,8 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
 import App from './components/App';
 import SongList from './components/SongList';
+import SongCreate from './components/SongCreate';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -21,6 +23,7 @@ const Root = () => {
         <Routes>
           <Route path="/" element={<App/>} >
             <Route index element={<SongList/>} />
+            <Route path="song/new" element={<SongCreate/>} />
           </Route>
         </Routes>
       </HashRouter>

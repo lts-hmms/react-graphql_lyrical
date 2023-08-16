@@ -1,5 +1,7 @@
 import React, { useState }  from "react";
 import { gql, useMutation } from '@apollo/client';
+import { Link, useNavigate } from 'react-router-dom';
+import GET_SONGS from '../queries/fetchSongs';
 
 const ADD_SONG = gql`
     mutation AddSong($title: String) {
@@ -12,6 +14,7 @@ const ADD_SONG = gql`
 
 const SongCreate = () => {
     const [title, setTitle] = useState('');
+    const navigate = useNavigate();
     const [addSong, { data, loading, error }] = useMutation(ADD_SONG);
 
     const handleChange = (event) => {
@@ -20,8 +23,11 @@ const SongCreate = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addSong({ variables: { title } });
-        setTitle('');
+        addSong({ variables: { title }, refetchQueries: [{ query: GET_SONGS }] })
+            .then(() => {
+            setTitle('');
+            navigate('/');
+        });
     };
 
     if (loading) return <p>Loading...</p>;
@@ -30,6 +36,7 @@ const SongCreate = () => {
    
     return (
     <div>
+        <Link to='/'>Back</Link>
         <h3>Create a New Song</h3>
         <form onSubmit={handleSubmit}>
             <label>Song Title:</label>

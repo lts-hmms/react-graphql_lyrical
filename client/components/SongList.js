@@ -1,7 +1,8 @@
 import React from 'react';
 import { gql, useQuery, useMutation }  from '@apollo/client';
 import { Link } from 'react-router-dom';
-import GET_SONGS from '../queries/fetchSongs';
+import GET_SONGS from '../queries/fetchSonglist';
+import SongDetail from './SongDetail';
 
 
 
@@ -14,8 +15,6 @@ const DisplaySongs = () => {
         .then(() => refetch());
     };
 
-    
-
     if (loading) return <p>Loading...</p>;
     
     if (error) return <p>Error</p>;
@@ -23,13 +22,15 @@ const DisplaySongs = () => {
     return (
             data.songs.map(song => {
                 return (
-                    <li key={song.id} className='collection-item'>{song.title} 
+                    <li key={song.id} className='collection-item'>{song.title}
                     <i className='material-icons' onClick={() => onSongDelete(song.id)}>delete</i>
                     </li>
                 );
             })
     );
 };
+
+
 
 
 export default function SongList() {

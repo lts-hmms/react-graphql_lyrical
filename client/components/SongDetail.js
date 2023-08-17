@@ -1,5 +1,5 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import FETCHSONG from "../queries/fetchSong";
 import { useParams } from "react-router-dom";
 

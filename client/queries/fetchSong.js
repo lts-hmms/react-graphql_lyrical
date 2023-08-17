@@ -1,5 +1,4 @@
-import gql from 'graphql-tag';
-
+import { gql } from '@apollo/client';
 
 const FETCHSONG = gql`
 query SongQuery ($id: ID!){

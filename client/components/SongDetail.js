@@ -1,7 +1,9 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 import FETCHSONG from "../queries/fetchSong";
 import { useParams } from "react-router-dom";
+import LyricCreate from "./LyricCreate";
 
 
 
@@ -14,19 +16,19 @@ const SongDetail = () => {
         }
     );
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return null;
     if (error) return <p>Error: {error.message} </p>;
 
     
     return (
     <div>
-        <h3>Song Detail</h3>
-        <p>{data.song.title}</p>
+        <Link to='/'>Back</Link>
+        <h3>{data.song.title}</h3>
+        <LyricCreate songId={id} />
+
 
     </div>
     )
 };
-
-
 
 export default SongDetail;

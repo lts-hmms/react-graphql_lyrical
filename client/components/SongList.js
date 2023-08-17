@@ -22,7 +22,7 @@ const DisplaySongs = () => {
     return (
             data.songs.map(song => {
                 return (
-                    <li key={song.id} className='collection-item'>{song.title}
+                    <li key={song.id} className='collection-item'><Link to={`/songs/${song.id}`}> {song.title} </Link>
                     <i className='material-icons' onClick={() => onSongDelete(song.id)}>delete</i>
                     </li>
                 );

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import FETCHSONG from "../queries/fetchSong";
 import { useParams } from "react-router-dom";
 import LyricCreate from "./LyricCreate";
+import LyricList from "./LyricList";
 
 
 
@@ -24,6 +25,7 @@ const SongDetail = () => {
     <div>
         <Link to='/'>Back</Link>
         <h3>{data.song.title}</h3>
+        <LyricList lyrics={data.song.lyrics}/>
         <LyricCreate songId={id} />
 
 

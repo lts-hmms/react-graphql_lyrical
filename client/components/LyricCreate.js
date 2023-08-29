@@ -12,6 +12,7 @@ const ADDLYRIC = gql`
             lyrics {
                 id
                 content
+                likes
             }
         }
     }

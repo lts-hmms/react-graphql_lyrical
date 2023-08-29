@@ -14,9 +14,19 @@ const LIKE_LYRIC = gql`
 const LyricList = ({lyrics}) => {
     const [likeLyric] = useMutation(LIKE_LYRIC);
 
-    const onLike = (id) => {
-        console.log(id);
-        likeLyric({ variables: { id } });
+    const onLike = (id, likes) => {
+        likeLyric({
+            variables: { id },
+            optimisticResponse: {
+                // Guess what the server response will be
+                __typename: "Mutation",
+                likeLyric: {
+                    id,
+                    __typename: "LyricType",
+                    likes: likes + 1
+                }   
+            }
+        });
     };
 
     const renderLyrics = () => {
@@ -26,7 +36,7 @@ const LyricList = ({lyrics}) => {
                 <div className="vote-box">
                     <i 
                         className="material-icons"
-                        onClick={() => {onLike(id)}}
+                        onClick={() => {onLike(id, likes)}}
                     >
                             thumb_up
                     </i>

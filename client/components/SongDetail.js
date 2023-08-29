@@ -27,8 +27,6 @@ const SongDetail = () => {
         <h3>{data.song.title}</h3>
         <LyricList lyrics={data.song.lyrics}/>
         <LyricCreate songId={id} />
-
-
     </div>
     )
 };
